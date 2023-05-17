@@ -1,0 +1,25 @@
+<?php
+echo "File : " . __FILE__ . "\n";
+echo "Directory: " . __DIR__ . "\n";
+echo "Linea : " . __LINE__ . "\n";
+echo 234 + 46.6 . "\n";
+echo 1234 - 23.12 . "\n";
+echo 6789 / 123 . "\n";
+echo 234 * 3451 . "\n";
+echo 3452 % 245 . "\n";
+echo pow(345, 12) . "\n";
+$a = 2;
+echo "12 è ";
+echo (12 % $a == 0) ? "pari"  : "dispari";
+echo "\n45 è ";
+echo (45 % $a == 0) ? "pari"  : "dispari";
+echo "\n37 è ";
+echo (37 % $a == 0) ? "pari"  : "dispari";
+echo "\n12 è ";
+echo (12 % $a == 0) ? "pari"  : "dispari";
+echo decbin(121);
+echo dechex(34526);
+echo decoct(324);
+$alfa = 0.9438;
+echo "\n" . 1 - pow(sin($alfa), 2) . "\n";
+echo  lcfirst(str_replace(' ', '', ucwords("Nel mezzo del Cammin di nostra vita ")));
