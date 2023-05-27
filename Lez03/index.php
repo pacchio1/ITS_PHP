@@ -15,8 +15,10 @@ $matrix2 = [
 ];
 print_r($matrix2);
 */
-$cf = 'PCCMRC02S09L219C';
+
+//$cf = 'PCCMRC02S09L219C';
 //$cf = 'AAABBB00Y01S100D';
+
 $nc = substr($cf, 0, 6);
 $yy = substr($cf, 6, 2);
 $m = substr($cf, 8, 1);
@@ -30,21 +32,22 @@ $valresto = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 
 
 
-$total = $valDisp[substr($cf, 0, 1)] +
+$total =
     $valDisp[substr($cf, 0, 1)] +
-    $valDisp[substr($cf, 1, 1)] +
     $valDisp[substr($cf, 2, 1)] +
-    $valDisp[substr($cf, 3, 1)] +
     $valDisp[substr($cf, 4, 1)] +
-    $valDisp[substr($cf, 5, 1)] +
     $valDisp[substr($cf, 6, 1)] +
-    $valDisp[substr($cf, 7, 1)] +
     $valDisp[substr($cf, 8, 1)] +
-    $valDisp[substr($cf, 9, 1)] +
     $valDisp[substr($cf, 10, 1)] +
-    $valDisp[substr($cf, 11, 1)] +
     $valDisp[substr($cf, 12, 1)] +
-    $valDisp[substr($cf, 13, 1)];
+    $valDisp[substr($cf, 14, 1)] +
+    $valPar[substr($cf, 1, 1)] +
+    $valPar[substr($cf, 3, 1)] +
+    $valPar[substr($cf, 5, 1)] +
+    $valPar[substr($cf, 7, 1)] +
+    $valPar[substr($cf, 9, 1)] +
+    $valPar[substr($cf, 11, 1)] +
+    $valPar[substr($cf, 13, 1)];
 
 $resto = $total % 26;
 $ccc = $valresto[$resto];
@@ -52,14 +55,14 @@ $ccc = $valresto[$resto];
 
 
 if (strlen($cf) !== 16) {
-    echo ("codice fiscale non valido");
+    echo ("codice fiscale NON valido");
 } //piu lungo di 16 caratteri
 if (!preg_match('/^[a-zA-Z0-9]+$/', $cf)) {
-    echo ("codice fiscale non valido");
+    echo ("codice fiscale NON valido");
 } //espressione regolare
 echo $ccc . " " . $cc . "\n";
 if ($ccc !== $cc) {
-    echo ("codice fiscale non valido");
+    echo ("codice fiscale NON valido");
 } //codice caratere controllo
 else {
     echo ("codice fiscale valido");
