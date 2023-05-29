@@ -1,10 +1,25 @@
 <?php
+//es 1
 $a = null;
 $b = null;
 $c = 6;
 $result = $a ?? $b ?? $c;
 echo $result;
 
+//es 2
+$a = 0;
+$b = 1;
+echo "$a\n$b\n";
+for ($i = 2; $i <= 100; $i++) {
+    $next = $a + $b;
+    echo "$next" . "\n";
+    $a = $b;
+    $b = $next;
+}
+
+
+
+/*
 $cf = 'PCCMRC02S09L219C';
 //$cf = 'AAABBB00Y01S100D';
 
@@ -21,7 +36,7 @@ $valresto = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M
 
 
 
-$total =
+
     $valDisp[substr($cf, 0, 1)] +
     $valDisp[substr($cf, 2, 1)] +
     $valDisp[substr($cf, 4, 1)] +
@@ -58,3 +73,4 @@ if ($ccc !== $cc) {
 else {
     echo ("codice fiscale valido");
 }
+*/
