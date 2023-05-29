@@ -1,20 +1,9 @@
 <?php
-/*$a = 32;
-$b = sprintf('%b, %o, %x', $a, $a, $a);
-echo $b;*/
-/*
-$matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-];
-$matrix2 = [
-    [$matrix[0][0], $matrix[1][0]],
-    [$matrix[0][1], $matrix[1][1]],
-    [$matrix[0][2], $matrix[1][2]],
-
-];
-print_r($matrix2);
-*/
+$a = null;
+$b = null;
+$c = 6;
+$result = $a ?? $b ?? $c;
+echo $result;
 
 $cf = 'PCCMRC02S09L219C';
 //$cf = 'AAABBB00Y01S100D';
@@ -48,6 +37,8 @@ $total =
     $valPar[substr($cf, 9, 1)] +
     $valPar[substr($cf, 11, 1)] +
     $valPar[substr($cf, 13, 1)];
+
+
 
 $resto = $total % 26;
 $ccc = $valresto[$resto];
