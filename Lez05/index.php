@@ -75,5 +75,4 @@ function quickSort($array)
 	//ricorsività
 	return array_merge(quickSort($left), array($pivot), quickSort($right));
 }
-$tmp = quicksort($voti);
-print_r($tmp);
+print_r(quicksort($voti));
