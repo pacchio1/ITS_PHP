@@ -1,7 +1,18 @@
 <?php
-if (filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) === false) {
-    header('Location: /Php/Lez10/Pacchiotti/login.html');
+session_start();
+
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false  && strlen($password) > 6) {
+    $_SESSION['email'] = $email;
+    header('Location: home.php');
+    $file = fopen('login.txt', 'w');
+    $password = md5($password);
+    fwrite($file, '\n' . $email . ' ' . $password);
+    fclose($file);
+    exit();
 } else {
-    session_start();
-    header('Location: /Php/Lez10/Pacchiotti/index.php');
+    header('Location: login.html');
+    exit();
 }
