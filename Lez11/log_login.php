@@ -7,7 +7,7 @@ use Monolog\Handler\StreamHandler;
 
 // create a log channel
 $log = new Logger('name');
-$log->pushHandler(new StreamHandler('path/to/your.log', Level::Warning));
+$log->pushHandler(new StreamHandler('Lez11/logs', Level::Warning));
 
 // add records to the log
 $log->warning('Foo');
