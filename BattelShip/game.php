@@ -1,4 +1,5 @@
 <?php
+$turno = 0;
 
 ?>
 <!DOCTYPE html>
@@ -62,3 +63,4 @@
 
 
 </html>
+<?php

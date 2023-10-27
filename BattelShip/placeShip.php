@@ -11,25 +11,10 @@ function inizializePersonalBoard()
     return $personalBoard;
 }
 //creo le navi
-$destroyer = new boat("destroyer", 2);
-$submarine = new boat("submarine", 3);
-$cruiser = new boat("cruiser", 3);
-$battleship = new boat("battleship", 4);
-$carrier = new boat("carrier", 5);
-
-//inizializo le navi che mi servono
-$l4   = $battleship;
-$l3_1 = $carrier;
-$l3_2 = $carrier;
-$l2_1 = $destroyer;
-$l2_2 = $destroyer;
-$l2_3 = $destroyer;
-
-
 $personalBoard = inizializePersonalBoard();
 
 // input del utente
-//l4 = 1 | l3_1 =2 | l3_2 = 3 | l2_1 = 4 | l2_2 = 5 | l2_3 = 6
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,11 +22,85 @@ $personalBoard = inizializePersonalBoard();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Battleship</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 30px;
+            height: 30px;
+            border: 1px solid black;
+        }
+
+        .selected {
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="tabellone">
+        <table>
+            <?php
+            for ($i = 0; $i < 10; $i++) {
+                echo "<tr>";
+                for ($j = 0; $j < 10; $j++) {
+                    echo "<td class='cella' ></td>";
+                }
+                echo "</tr>";
+            }
+            ?>
+        </table>
+    </div>
+    <div id="nave">
+        <form action="placeShip.php" method="post">
+            <input type="radio" name="nave" value="1">Incrociatore
+            <input type="radio" name="nave" value="2">Sottomarino 1
+            <input type="radio" name="nave" value="3">Sottomarino 2
+            <input type="radio" name="nave" value="4">Cacciatorpediniere 1
+            <input type="radio" name="nave" value="5">Cacciatorpediniere 2
+            <input type="radio" name="nave" value="6">Cacciatorpediniere 3
+            <input type="submit" value="posiziona">
+        </form>
 
+        <script>
+            const cells = document.querySelectorAll("td");
+            let selectedCell = null;
+            let selectedShip = null;
+
+            const ships = document.querySelectorAll("input[type=radio]");
+            ships.forEach(ship => {
+                ship.addEventListener("dragstart", () => {
+                    selectedShip = ship.value;
+                });
+            });
+
+            cells.forEach(cell => {
+                cell.addEventListener("dragover", e => {
+                    e.preventDefault();
+                });
+
+                cell.addEventListener("drop", () => {
+                    if (selectedCell) {
+                        selectedCell.classList.remove("selected");
+                    }
+                    selectedCell = cell;
+                    selectedCell.classList.add("selected");
+                    selectedCell.innerHTML = selectedShip;
+                });
+            });
+
+            const form = document.querySelector("form");
+            form.addEventListener("submit", e => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "game.php");
+                xhr.send(formData);
+            });
+        </script>
 </body>
 
 </html>
