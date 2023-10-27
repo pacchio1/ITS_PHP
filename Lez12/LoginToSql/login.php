@@ -6,14 +6,9 @@ $user = 'root';
 $Login = new class_login();
 try {
     $pdo = new PDO($dsn, $user);
-} catch (PDOException $e) {
-    printf("Connection failed: %s \n", $e->getMessage());
-    exit(1);
-}
-
-try {
     $Login->Login($_POST['email'], $_POST['password'], 'login.html', 'index.php');
     $Login->SaveDataInSql($_POST['email'], $_POST['password'], $pdo, 'login');
-} catch (Exception $e) {
-    echo $e->getMessage();
+} catch (PDOException $e) {
+    printf("Connection failed or bad datas: %s \n", $e->getMessage());
+    exit(1);
 }

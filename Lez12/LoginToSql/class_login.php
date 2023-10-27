@@ -11,6 +11,7 @@ class class_login
         header('Location: ' . $posizione);
         exit();
     }
+
     public function Login($email, $password, $bad_page, $good_page)
     {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false  && strlen($password) > 6) {
@@ -23,7 +24,7 @@ class class_login
     public function SaveDataFileFlat($email, $password)
     {
         $file = fopen('login.txt', 'w');
-        $password = md5($password);
+        $password = hash('sha256', $password);
         fwrite($file, '\n' . $email . ' ' . $password);
         fclose($file);
     }
@@ -31,7 +32,7 @@ class class_login
     {
         $sql = "INSERT INTO $nome_tabella (email, password) VALUES (:email, :password)";
         $stmt = $pdo->prepare($sql);
-        $password = $password;
+        $password = hash('sha256', $password);
         $email = $email;
 
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);

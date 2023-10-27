@@ -1,8 +1,5 @@
 <?php
-if (!isset($_COOKIE['username'])) {
-    header("Location: index.php");
-    exit;
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,7 +36,7 @@ if (!isset($_COOKIE['username'])) {
         <?php for ($i = 0; $i < 10; $i++) { ?>
             <tr>
                 <?php for ($j = 0; $j < 10; $j++) { ?>
-                    <td onclick="<?php echo ('r' . $i . '_' . $j) ?>"></td>
+                    <td id="<?php echo ($i . '_' . $j) ?>" onclick="shoot(<?php echo ($i . ',' . $j) ?>)"></td>
                 <?php } ?>
             </tr>
         <?php } ?>
@@ -49,11 +46,19 @@ if (!isset($_COOKIE['username'])) {
         <?php for ($i = 0; $i < 10; $i++) { ?>
             <tr>
                 <?php for ($j = 0; $j < 10; $j++) { ?>
-                    <td onclick="<?php echo ('b' . $i . '_' . $j) ?>"></td>
+                    <td></td>
                 <?php } ?>
             </tr>
         <?php } ?>
     </table>
+    <script>
+        function shoot(i, j) {
+            console.log("sparatoa a: " + i + " " + j);
+            var tdElement = document.getElementById(i + "_" + j);
+            tdElement.removeAttribute("onclick");
+        }
+    </script>
 </body>
+
 
 </html>
