@@ -1,6 +1,5 @@
 <?php
 $turno = 0;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,26 +8,7 @@ $turno = 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corazzata Cucuzza - Game</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-
-        td {
-            width: 30px;
-            height: 30px;
-            border: 1px solid black;
-        }
-
-        .red {
-            background-color: red;
-        }
-
-        .blu {
-            background-color: lightblue;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -37,7 +17,9 @@ $turno = 0;
         <?php for ($i = 0; $i < 10; $i++) { ?>
             <tr>
                 <?php for ($j = 0; $j < 10; $j++) { ?>
-                    <td id="<?php echo ($i . '_' . $j) ?>" onclick="shoot(<?php echo ($i . ',' . $j) ?>)"></td>
+                    <td id="<?php echo ($i . '_' . $j) ?>" onclick="shoot(<?php echo ($i . ',' . $j) ?>)" <?php if ($turno != 0) {
+                                                                                                                echo 'disabled';
+                                                                                                            } ?>></td>
                 <?php } ?>
             </tr>
         <?php } ?>
@@ -57,10 +39,17 @@ $turno = 0;
             console.log("sparatoa a: " + i + " " + j);
             var tdElement = document.getElementById(i + "_" + j);
             tdElement.removeAttribute("onclick");
+            tdElement.setAttribute("class", "blu");
+            <?php
+            if ($turno == 0) {
+                echo '$turno = 1;';
+            } else {
+                echo '$turno = 0;';
+            }
+            ?>
         }
     </script>
 </body>
 
 
 </html>
-<?php

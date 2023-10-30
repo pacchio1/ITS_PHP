@@ -1,0 +1,22 @@
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.selected {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
+
+.blu {
+    background-color: lightblue;
+}
