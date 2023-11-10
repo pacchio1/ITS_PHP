@@ -90,9 +90,9 @@ function posizionare($boat_to_place, $gioco, $tabella_su_cui_posizionare)
 }
 
 echo "A posiziona le tue navi";
-posizionare($boat_to_place, $gioco, $tabella_A);
+posizionare($boat_to_place, $gioco, $gioco->set_tabB($tabella_A));
 echo "B posiziona le tue navi";
-posizionare($boat_to_place, $gioco, $tabella_B);
+posizionare($boat_to_place, $gioco, $gioco->set_tabB($tabella_B));
 
 // dati di prova
 /* $tabella_A = array(
@@ -132,9 +132,6 @@ function turno($tabella_player, $tabella_enemy, $gioco,)
 }
 
 while (!$fine) {
-    //TODO: far capire che la nave è stata colpita, vittoria
-
-
     if ($turno % 2 == 0) {
         echo "È il turno di A\n";
         $tabella_B = turno($tabella_A, $tabella_B, $gioco);

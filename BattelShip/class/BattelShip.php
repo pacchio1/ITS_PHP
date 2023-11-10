@@ -1,7 +1,52 @@
-<?php
-
-class BattelShip
+<?php class BattelShip
 {
+    public $tabella_A;
+    public $tabella_B;
+    public function __construct()
+    {
+        $this->tabella_A =
+            array(
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O')
+            );
+        $this->tabella_B =
+            array(
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+                array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O')
+            );
+    }
+    public function get_tabA()
+    {
+        return $this->tabella_A;
+    }
+    public function get_tabB()
+    {
+        return $this->tabella_B;
+    }
+    public function set_tabA($tabella_A)
+    {
+        $this->tabella_A = $tabella_A;
+    }
+    public function set_tabB($tabella_B)
+    {
+        $this->tabella_B = $tabella_B;
+    }
     public function visualizzaTabella($tabella_da_visualizzare)
     {
         for ($i = 0; $i < 10; $i++) {
@@ -15,8 +60,6 @@ class BattelShip
     {
         $lunghezza = 0;
         //DEBUG: echo $x . " " . $y . " " . $orientamento . " " . $boat_type . " " . $tabella_su_cui_posizionare;
-
-
         switch ($boat_type) {
             case 'portaerei':
                 $lunghezza = 5;
@@ -92,5 +135,10 @@ class BattelShip
             }
         }
         return true;
+    }
+    public function salvaStatoGioco($tabella_da_salvare, $nickname, $db)
+    {
+        $sql = "UPDATE giocatori SET tabella = '$tabella_da_salvare' WHERE nickname = '$nickname'";
+        $db->query($sql);
     }
 }

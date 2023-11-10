@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"App\\Test\\FilterTest::testValidEmail":0.004,"App\\Test\\FilterTest::testInvalidEmail":0}}
+{"version":1,"defects":[],"times":{"App\\Test\\FilterTest::testValidEmail":0.005,"App\\Test\\FilterTest::testInvalidEmail":0}}

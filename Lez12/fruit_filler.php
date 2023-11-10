@@ -23,14 +23,14 @@ for ($i = 0; $i < 100; $i++) {
 }
 */
 
-$sql = "select * from fruit where colore = :colore and calorie BETWEEN :caloriemin  AND :caloriemax;";
+$sql = "select * from fruit where colore = :colore and calorie BETWEEN :calorie_min  AND :calorie_max;";
 $stmt = $pdo->prepare($sql);
 $colore = "rosso";
-$caloriemin = 100;
-$caloriemax = 400;
+$calorie_min = 100;
+$calorie_max = 400;
 $stmt->bindParam(':colore', $colore, PDO::PARAM_STR);
-$stmt->bindParam(':caloriemin', $caloriemin, PDO::PARAM_INT);
-$stmt->bindParam(':caloriemax', $caloriemax, PDO::PARAM_INT);
+$stmt->bindParam(':calorie_min', $calorie_min, PDO::PARAM_INT);
+$stmt->bindParam(':calorie_max', $calorie_max, PDO::PARAM_INT);
 $stmt->execute();
 
 $fruits = $stmt->fetchAll(PDO::FETCH_ASSOC);
