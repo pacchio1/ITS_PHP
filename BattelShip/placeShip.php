@@ -8,12 +8,13 @@ $db->connect();
 $game = new BattelShip();
 $navi_posizionate = false;
 
-while ($navi_posizionate) {
-    $x = 0;
-    $y = 0;
-    $orientamento = '';
-    $boat_type = '';
-    //TODO: input delle navi da front-end
+// TODO: capire come mandarli/arrivano dal frontend
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $x = $_POST['x'];
+    $y = $_POST['y'];
+    $orientamento = $_POST['orientamento'];
+    $boat_type = $_POST['boat_type'];
+
     try {
         if (!($x < 10 and $x >= 0)) {
             throw new Exception("X non valida");
@@ -22,9 +23,12 @@ while ($navi_posizionate) {
             throw new Exception("Y non valida");
         }
         $game->set_tabA($game->posizionaNave($x, $y, $orientamento, $boat_type, $game->get_tabA()));
+        $navi_posizionate = true;
     } catch (Exception $e) {
         echo $e->getMessage();
     }
 }
 
-header("Location: lobby.php");
+if ($navi_posizionate) {
+    header("Location: lobby.php");
+}
