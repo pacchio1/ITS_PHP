@@ -55,6 +55,7 @@
         }
         $('#board').append(table);
     }
+
     var orientamento = 'orizzontale';
     $('#ruotaBarche').on('click', function() {
         if (orientamento == 'orizzontale') {
@@ -81,12 +82,12 @@
     });
 
     var boat_placed = 6;
-    //TODO: trasformare posiziona barche in posiziona barca e alla 6 fare la chiamata ajax
+
     // Chiamata AJAX
     $('#posizionaBarche').on('click', function() {
         if (boat_placed == 0) {
             JSON.stringify(tabella);
-            // TODO: inserire la configurazione della griglia con le barche posizionate
+
             $.ajax({
                 type: 'POST',
                 url: '../placeShip.php',
@@ -111,7 +112,6 @@
         }
 
     });
-
 
     $(document).ready(function() {
         generateGrid();
