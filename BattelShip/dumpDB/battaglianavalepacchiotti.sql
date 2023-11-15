@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Nov 14, 2023 alle 12:21
+-- Creato il: Nov 14, 2023 alle 15:05
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -52,8 +52,16 @@ INSERT INTO `giocatori` (`ID_giocatore`, `nickname`, `tabella`) VALUES
 CREATE TABLE `partita` (
   `nicknameHost` text NOT NULL,
   `nicknameSfidante` text NOT NULL,
-  `ID_Partita` int(11) NOT NULL
+  `ID_Partita` int(11) NOT NULL,
+  `vincitore` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dump dei dati per la tabella `partita`
+--
+
+INSERT INTO `partita` (`nicknameHost`, `nicknameSfidante`, `ID_Partita`, `vincitore`) VALUES
+('Mark2pac', 'Giorgio', 1, 'Mark2pac');
 
 --
 -- Indici per le tabelle scaricate
