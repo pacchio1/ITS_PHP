@@ -16,14 +16,14 @@
     </div>
     <br>
     <div>
-        <input type="radio" name="Incrociatore1" value="Incrociatore"><img src="img/4.png" alt="4">(Incrociatore)
-        <input type="radio" name="Sottomarino1" value="Sottomarino"><img src="img/3.png" alt="3">(Sottomarino 1)
-        <input type="radio" name="Sottomarino2" value="Sottomarino"><img src="img/3.png" alt="3">(Sottomarino 2)
-        <input type="radio" name="Cacciatorpediniere1" value="Cacciatorpediniere"><img src="img/2.png"
+        <input type="radio" name="Incrociatore1" value="incrociatore"><img src="img/4.png" alt="4">(Incrociatore)
+        <input type="radio" name="Sottomarino1" value="sottomarino"><img src="img/3.png" alt="3">(Sottomarino 1)
+        <input type="radio" name="Sottomarino2" value="sottomarino"><img src="img/3.png" alt="3">(Sottomarino 2)
+        <input type="radio" name="Cacciatorpediniere1" value="cacciatorpediniere"><img src="img/2.png"
             alt="2">(Cacciatorpediniere 1)
-        <input type="radio" name="Cacciatorpediniere2" value="Cacciatorpediniere"><img src="img/2.png"
+        <input type="radio" name="Cacciatorpediniere2" value="cacciatorpediniere"><img src="img/2.png"
             alt="2">(Cacciatorpediniere 2)
-        <input type="radio" name="Cacciatorpediniere3" value="Cacciatorpediniere"><img src="img/2.png"
+        <input type="radio" name="Cacciatorpediniere3" value="cacciatorpediniere"><img src="img/2.png"
             alt="2">(Cacciatorpediniere 3)
     </div>
 

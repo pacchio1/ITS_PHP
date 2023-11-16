@@ -62,13 +62,13 @@
         //DEBUG: echo $x . " " . $y . " " . $orientamento . " " . $boat_type . " " . $tabella_su_cui_posizionare;
         switch ($boat_type) {
             case 'portaerei':
-                $lunghezza = 5;
+                $lunghezza = 6;
                 break;
             case 'corazzata':
-                $lunghezza = 4;
+                $lunghezza = 5;
                 break;
             case 'incrociatore':
-                $lunghezza = 3;
+                $lunghezza = 4;
                 break;
             case 'sottomarino':
                 $lunghezza = 3;
@@ -88,7 +88,7 @@
                     for ($i = $y; $i < $y + $lunghezza; $i++) {
                         $tabella_su_cui_posizionare[$x][$i] = 'X';
                     }
-                    echo "Nave posizionata con successo!\n";
+                    //echo "Nave posizionata con successo!\n";
                 } else {
                     echo "Posizione non valida! La nave non può essere posizionata in questa posizione.\n";
                 }
@@ -138,6 +138,7 @@
     }
     public function salvaStatoGioco($tabella_da_salvare, $nickname, $db)
     {
+        $tabella_da_salvare=json_encode($tabella_da_salvare);
         $sql = "UPDATE giocatori SET tabella = '$tabella_da_salvare' WHERE nickname = '$nickname'";
         $db->query($sql);
     }

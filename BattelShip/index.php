@@ -39,4 +39,4 @@ $id_sessione = uniqid();
 $_SESSION['nickname'] = $nickname;
 $_SESSION['id_sessione'] = $id_sessione;
 
-header("Location: placeShip.php");
+header("Location: placeShip_frontend.php");

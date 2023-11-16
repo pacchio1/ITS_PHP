@@ -3,16 +3,22 @@ include 'class/BattelShip.php';
 include 'class/SqlConnection.php';
 
 session_start();
+ob_start();
 
 $db = new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
 $db->connect();
+$nk=$_SESSION['nickname'];
 
 $game = new BattelShip();
 $navi_posizionate = false;
 
+
 // TODO: capire come mandarli/arrivano dal frontend
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $tabella = json_decode(file_get_contents('php://input'), true);
+    $tabella = $_POST['tabella'];
+
+    //var_dump($tabella);
+
 
     foreach ($tabella as $nave) {
         $x = $nave[0];
@@ -35,7 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($navi_posizionate) {
-        $game->salvaStatoGioco($game->get_tabA(),$_SESSION['nickname'], $db);
+
+        //echo $game->visualizzaTabella($game->get_tabA());
+        $game->salvaStatoGioco($game->get_tabA(),$nk, $db);
+        ob_end_flush();
         header("Location: lobby.php");
     }
 }
