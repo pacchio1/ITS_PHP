@@ -96,6 +96,7 @@
                 },
                 success: function(response) {
                     alert('Barche posizionate con successo!');
+                    window.location.replace("lobby.php");
 
                 },
                 error: function() {
