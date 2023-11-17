@@ -96,6 +96,7 @@
                 },
                 success: function(response) {
                     alert('Barche posizionate con successo!');
+                    //TODO: ajax per gettare dove andare se su game(sfidante) o lobby(host)
                     window.location.replace("lobby.php");
 
                 },
