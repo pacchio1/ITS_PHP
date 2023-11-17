@@ -9,5 +9,6 @@ if(isset($_POST['submit'])){
         $login->Login($email, $password, 'PHP-DI_login.php', 'success.html');
     }catch(Exception $e){
         echo $e->getMessage();
+
     }
 }
