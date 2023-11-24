@@ -119,6 +119,7 @@
         generateGrid();
     });
     </script>
+    DEBUG: <a href="lobby.php">ignora posizionamento</a>
 </body>
 
 </html>

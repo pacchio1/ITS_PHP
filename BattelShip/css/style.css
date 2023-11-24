@@ -10,9 +10,11 @@ td {
 }
 
 .selected {
-    background-color: blue;
+    background-color: darkblue;
 }
-
+.occupate{
+    background-color: gray;
+}
 .red {
     background-color: red;
 }
