@@ -34,38 +34,14 @@
                 <mxCell id="19" style="edgeStyle=none;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="6" target="16" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="27" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="6" target="26">
+                <mxCell id="27" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="6" target="26" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="game.php" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="270" y="260" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="&lt;div style=&quot;color: rgb(214, 213, 227); background-color: rgb(31, 29, 54); font-family: &amp;quot;Courier New&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 18px; line-height: 24px;&quot;&gt;&lt;div style=&quot;line-height: 24px;&quot;&gt;&lt;span style=&quot;color: #ed98cb;&quot;&gt;$_SESSION&lt;/span&gt;[&lt;span style=&quot;color: #91d6a7;&quot;&gt;'id_sessione'&lt;/span&gt;]&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="450" y="180" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="14" value="&lt;div style=&quot;color: rgb(214, 213, 227); background-color: rgb(31, 29, 54); font-family: &amp;quot;Courier New&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 18px; line-height: 24px;&quot;&gt;&lt;span style=&quot;color: #ed98cb;&quot;&gt;$_POST&lt;/span&gt;[&lt;span style=&quot;color: #91d6a7;&quot;&gt;'nickname'&lt;/span&gt;]&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="700" y="180" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="15" value="&lt;div style=&quot;color: rgb(214, 213, 227); background-color: rgb(31, 29, 54); font-family: &amp;quot;Courier New&amp;quot;, Consolas, &amp;quot;Courier New&amp;quot;, monospace; font-size: 18px; line-height: 24px;&quot;&gt;&lt;div style=&quot;line-height: 24px;&quot;&gt;&lt;span style=&quot;color: #ed98cb;&quot;&gt;$_SESSION&lt;/span&gt;[&lt;span style=&quot;color: #91d6a7;&quot;&gt;'personalBoard'&lt;/span&gt;]&lt;/div&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="460" y="220" width="60" height="30" as="geometry"/>
-                </mxCell>
                 <mxCell id="16" value="db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" parent="1" vertex="1">
                     <mxGeometry x="90" y="205" width="40" height="55" as="geometry"/>
-                </mxCell>
-                <mxCell id="20" value="Turni" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="340" y="260" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="21" value="colpito" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="420" y="260" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="22" value="affondato" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="490" y="260" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="23" value="acqua" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="560" y="260" width="60" height="30" as="geometry"/>
-                </mxCell>
-                <mxCell id="24" value="vittoria&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-                    <mxGeometry x="630" y="260" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="25" value="" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;endArrow=none;" parent="1" source="5" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -76,7 +52,7 @@
                 <mxCell id="4" value="lobby.php" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="270" y="230" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="sfidante.php" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                <mxCell id="26" value="sfidante.php" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="270" y="300" width="60" height="30" as="geometry"/>
                 </mxCell>
             </root>

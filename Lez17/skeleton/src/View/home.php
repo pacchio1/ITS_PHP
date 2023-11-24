@@ -3,7 +3,7 @@
 <main class="home">
     <p><img src="/img/logo.png" alt="Logo SimpleMVC"></p>
     <p>Welcome to <a href="https://github.com/simplemvc">SimpleMVC</a> skeleton application for PHP.</p>
-    <p>This application contains 4 example controllers corrisponding to the following URLs (stored in <a href="https://github.com/simplemvc/skeleton/blob/main/config/route.php">config/route.php</a>):</p>
+    <p>This application contains 4 example controllers corresponding to the following URLs (stored in <a href="https://github.com/simplemvc/skeleton/blob/main/config/route.php">config/route.php</a>):</p>
     <ul>
         <li><a href="/">/</a>, the home page (this page);</li>
         <li><a href="/hello">/hello[/:name]</a>, a hello page with an optional name (e.g. <a href="/hello/alberto">/hello/alberto</a>)</li>
