@@ -4,6 +4,7 @@
     public $tabella_B;
     public function __construct()
     {
+        //TODO: usare oggetto board
         $this->tabella_A =
             array(
                 array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
@@ -58,6 +59,7 @@
     }
     public function posizionaNave($x, $y, $orientamento, $boat_type, $tabella_su_cui_posizionare)
     {
+        //TODO: usare l' oggetti boat
         $lunghezza = 0;
         //DEBUG: echo $x . " " . $y . " " . $orientamento . " " . $boat_type . " " . $tabella_su_cui_posizionare;
         switch ($boat_type) {

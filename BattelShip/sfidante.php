@@ -1,8 +1,14 @@
 <?php
+require_once 'class/SqlConnection.php';
 $nickname = $_POST['nickname'];
 session_start();
+$id=$_SESSION['id'];
+$db= new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
+$db->connect();
+$db->query("UPDATE partita SET nicknameSfidante = '$nickname' WHERE ID_Partita = '$id'");
+$_SESSION['nickname'] = $nickname;
 
-$_SESSION['nickname'] = $nickname;?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 

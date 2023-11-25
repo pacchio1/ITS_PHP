@@ -13,7 +13,7 @@ $game = new BattelShip();
 $navi_posizionate = false;
 
 
-// TODO: capire come mandarli/arrivano dal frontend
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tabella = $_POST['tabella'];
 
