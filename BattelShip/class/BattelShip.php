@@ -142,4 +142,8 @@
         $sql = "UPDATE giocatori SET tabella = '$tabella_da_salvare' WHERE nickname = '$nickname'";
         $db->query($sql);
     }
+    public function SalvaVincitore($nickname_host,$nickname_sfidante, $nickname, $db){
+        $sql = "UPDATE partita SET vincitore = '$nickname'  WHERE nicknameHost = '$nickname_host' and nicknameSfidante='$nickname_sfidante'";
+        $db->query($sql);
+    }
 }

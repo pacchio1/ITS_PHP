@@ -1,6 +1,8 @@
 <?php
 include 'BattelShip.php';
 
+//soluzione cli delle problema(fatto per capire ed implementare piu facilmente la classe BattelShip)
+
 $gioco = new BattelShip();
 $turno = 1;
 $fine = false;

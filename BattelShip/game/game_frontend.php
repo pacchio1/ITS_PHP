@@ -28,10 +28,10 @@ $tabella_giocatore = json_decode($tabella_giocatore[0]);
 </head>
 
 <body>
-    <h1><?php echo $nickname;
-        $url = "/game.php?id={$id}";
-        echo "<a href='$url'> gioca! </a>, $url";?></h1>
-<h2>Colpisci:</h2>
+    <h1><?php echo $nickname;?></h1>
+    <h2><?php $url = "\n /game.php?id={$id}";
+        echo  $url;?></h2>
+<h2>Colpisci:</h2><div id="mossa"></div>
     <table class="red" id="tabellone">
         <?php for ($i = 0; $i < 10; $i++) { ?>
         <tr>
@@ -66,20 +66,39 @@ $tabella_giocatore = json_decode($tabella_giocatore[0]);
         var tdElement = document.getElementById(i + "_" + j);
         tdElement.removeAttribute("onclick");
         tdElement.setAttribute("class", "selected");
-        var coordinates = {i,j}
+        var mossa = document.getElementById("mossa");
+        var stati = ["water", "hit", "sicked"];
+        var coordinates = {i,j};
+        var tabellone = document.getElementById("tabellone");
+        tabellone.setAttribute("class", "waiting");
+
             //ajax per colpire
             $.ajax({
                 type: 'POST',
                 url: 'game_backend.php',
                 data: {
-                    coordinates: coordinates
-
+                    coordinates: coordinates,
+                    nickname: nickname
                 },
                 success: function(response) {
                     //TODO: far capire utente se ha colpito o meno
+                    mossa.innerText=coordinates.i + "," + coordinates.j;
+                    while(true){
+                        // get per ottenere se ha finito l' avversario
+                        $.ajax({
+                            type: 'GET',
+                            url: 'game_backend.php',
+                            data: {
 
-                    var tabellone = document.getElementById("tabellone");
-                    tabellone.setAttribute("class", "waiting");
+                            },
+                            success: function(response) {
+
+                            },
+                            error: function() {
+
+                            }
+                        });sleep(2);
+                    }
                 },
                 error: function() {
                     alert('Si è verificato un errore nel colpire la cella');
