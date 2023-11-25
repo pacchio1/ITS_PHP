@@ -22,3 +22,6 @@ td {
 .blu {
     background-color: lightblue;
 }
+.waiting{
+    pointer-events: none;
+}
