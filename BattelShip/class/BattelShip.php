@@ -114,18 +114,22 @@
 
     public function attacca($x, $y, $tabella_da_attaccare)
     {
+        $output="";
         if ($x >= 0 && $x < 10 && $y >= 0 && $y < 10) {
             if ($tabella_da_attaccare[$x][$y] == 'X') {
-                echo "Colpito!\n";
+
+                $output="Colpito!";
                 $tabella_da_attaccare[$x][$y] = 'H';
             } else {
-                echo "Mancato!\n";
+
+                $output="Mancato!";
                 $tabella_da_attaccare[$x][$y] = 'M';
             }
         } else {
-            echo "Posizione non valida!\n";
+            $output="Posizione non valida!";
+
         }
-        return $tabella_da_attaccare;
+        return [$tabella_da_attaccare,$output];
     }
     public function controllaVittoria($tabella_da_controllare)
     {

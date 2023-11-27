@@ -32,10 +32,7 @@ if ($tabella_giocatore==0){
 
 //var_dump(($tabella_giocatore));
 
-//FIXME: errore nello sfidante o nel ajax
-$sfidante=$db->query("SELECT nicknameSfidante FROM partita WHERE ID_Partita = '$id'");
-$sfidante = $sfidante->fetch_row();
-$sfidante= $sfidante[0];
+
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +47,7 @@ $sfidante= $sfidante[0];
 </head>
 
 <body>
-    <h1><?php echo $nickname;?> VS <div id="sfidante"></div></h1>
+    <h1><?php echo $nickname . 'VS <div id="sfidante">';?> </div></h1>
     <h2><?php $url = "\n /game.php?id={$id}";
         echo  $url;?></h2>
 <h2>Colpisci:</h2><div id="mossa"></div>
@@ -64,7 +61,7 @@ $sfidante= $sfidante[0];
         </tr>
         <?php } ?>
     </table>
-
+<div id="stato_div"></div>
 
     <br>
 
@@ -84,26 +81,30 @@ $sfidante= $sfidante[0];
 
     <script>
         var turno = 0;
-        var sfidante = document.getElementById("sfidante");
+        var sfidante_div = document.getElementById("sfidante");
+        var stato_div = document.getElementById("stato");
+        var stato = "";
+
         function GetAjax() {
+            var sfidante = <?php echo isset($_GET['sfidante']) ? '"'.$_GET['sfidante'] . '"' : '""'; ?>;
                             // get per ottenere se ha finito l' avversario
                             $.ajax({
                                 type: 'GET',
                                 url: 'game_backend.php',
                                 data: {
-                                    turno: turno
-                                    //todo: gettare lo stato
+                                    turno: turno,
+                                    risultato: stato
                                 },
-
                                 success: function(response) {
                                     console.log("1 ciclo e stato fatto");
                                     setTimeout(GetAjax, 3000); // Ritarda la prossima chiamata di 2 secondi
-                                    sfidante.innerText = <?php echo '"'.$sfidante . '"'; ?>;  ?
+
                                 },
                                 error: function() {
 
                                 }
                             });
+
                     }//funzione
         function shoot(i, j) {
         console.log("sparato a: " + i + " " + j);
@@ -111,10 +112,11 @@ $sfidante= $sfidante[0];
         tdElement.removeAttribute("onclick");
         tdElement.setAttribute("class", "selected");
         var mossa = document.getElementById("mossa");
-        var stati = ["water", "hit", "sicked"];
+
         var coordinates = {i,j};
         var tabellone = document.getElementById("tabellone");
         tabellone.setAttribute("class", "waiting");
+        var sfidante="";
 
             //ajax per colpire
             $.ajax({
@@ -122,11 +124,14 @@ $sfidante= $sfidante[0];
                 url: 'game_backend.php',
                 data: {
                     coordinates: coordinates,
-                    nickname: <?php echo $nickname; ?>
+                    id: <?php echo '"'.$id . '"'; ?>,
+                    turno: turno
                 },
                 success: function(response) {
                     //TODO: far capire utente se ha colpito o meno
                     mossa.innerText=coordinates.i + "," + coordinates.j;
+                    sfidante_div.innerText=sfidante
+                    stato_div.innerText=stato
                     GetAjax();
                 },
                 error: function() {
@@ -134,6 +139,7 @@ $sfidante= $sfidante[0];
                 }
             });
         }
+
     </script>
 </body>
 

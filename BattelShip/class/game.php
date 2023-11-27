@@ -130,7 +130,8 @@ function turno($tabella_player, $tabella_enemy, $gioco,)
     echo "Inserisci una coordinata Y: ";
     $input2 = readline();
     $tabella_enemy = $gioco->attacca($input1, $input2, $tabella_enemy);
-    return $tabella_enemy;
+    echo $tabella_enemy[1];
+    return $tabella_enemy[0];
 }
 
 while (!$fine) {
