@@ -5,9 +5,7 @@ include 'class/Player.php';
 session_start();
 
 if (!isset($_POST['nickname'])) {
-    ob_start();
-    echo "<a href='html/nickname.html'><h1> registrati! </h1></a>";
-    ob_end_flush();
+    header("Location: html/nickname.html");
     exit();
 }
 
@@ -23,7 +21,6 @@ $result = $db->query("SELECT COUNT(*) FROM giocatori WHERE nickname = '$nickname
 $row = $result->fetch_row();
 $count = $row[0];
 if ($count > 0) {
-
     $db->query("UPDATE giocatori SET tabella = '$tab' WHERE nickname = '$nickname'");
 } else {
     $tab = $player->getTabella();
@@ -32,11 +29,9 @@ if ($count > 0) {
 }
 
 $db->close();
-$id_sessione = uniqid();
-
-
 
 $_SESSION['nickname'] = $nickname;
-$_SESSION['id'] = $id;
 
 header("Location: placeShip_frontend.php");
+exit();
+

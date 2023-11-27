@@ -45,6 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //echo $game->visualizzaTabella($game->get_tabA());
         $game->salvaStatoGioco($game->get_tabA(),$nk, $db);
         ob_end_flush();
+        $tabella=$game->get_tabA();
+
 
     }
 }

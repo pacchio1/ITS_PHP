@@ -5,8 +5,9 @@ session_start();
 $id=$_SESSION['id'];
 $db= new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
 $db->connect();
-$db->query("UPDATE partita SET nicknameSfidante = '$nickname' WHERE ID_Partita = '$id'");
+$db->query("UPDATE partita SET nicknameSfidante = '$nickname', turno = 0 WHERE ID_Partita = '$id'");
 $_SESSION['nickname'] = $nickname;
+$db->query("INSERT INTO giocatori (nickname) VALUES ('$nickname')");
 
 ?>
 <!DOCTYPE html>
@@ -106,7 +107,6 @@ $_SESSION['nickname'] = $nickname;
                 },
                 success: function(response) {
                     alert('Barche posizionate con successo!');
-
                     window.location.replace(<?php echo "'game.php?id={$_SESSION['id']}'";?>);
 
                 },

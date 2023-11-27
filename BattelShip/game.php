@@ -14,6 +14,7 @@ if (!isset($_SESSION['nickname'])) {
 $id=$_GET['id'];
 $nk=$_SESSION['nickname'];
 $_SESSION['id']=$id;
+
 header('Location: game/game_frontend.php');
 
 
