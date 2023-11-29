@@ -6,7 +6,7 @@ require_once '../class/BattelShip.php';
 
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    var_dump($_POST);
+    //var_dump($_POST);
     $x=$_POST['i'];
     $y=$_POST['j'];
     $nickname=$_SESSION['nickname'];
@@ -31,20 +31,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     $tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
-    $tabella_sfidante = $tabella_sfidante->fetch_row();
+    $row = $tabella_sfidante->fetch_assoc();
+    $tabella = json_decode($row['tabella'], true);
+    $tabella_sfidante=$tabella;
 
     $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
-    $tabella_host = $tabella_host->fetch_row();
+    $row = $tabella_host->fetch_assoc();
+    $tabella = json_decode($row['tabella'], true);
+    $tabella_host=$tabella;
 
-    var_dump($tabella_sfidante);
-    var_dump($tabella_host);
+    //var_dump($tabella_sfidante);
+    //var_dump($tabella_host);
+
 
     function turno($tabella_enemy, $gioco, $x, $y){
         $tabella_enemy = $gioco->attacca($x,$y, $tabella_enemy);
         $_SESSION['risultato']=$tabella_enemy[1];
         return $tabella_enemy[0];
     }
-
+//TODO: Gestire turni per blocare sblocare campo
 
     if ($turno % 2 == 0) {
         //echo "È il turno del host\n";
@@ -53,8 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
             $_SESSION['vittoria']='host';
         }
+        var_dump($tabella_sfidante);
+        echo "\n ------------------------------------------";
+        var_dump($tabella_host);
+        echo "\n ------------------------------------------";
+        echo "\n ------------------------------------------";
+        echo($turno);
+        echo "\n ------------------------------------------";
+        echo($_SESSION['vittoria']);
         $turno=$turno+1;
-
     } else {
         //echo "È il turno dello sfidante\n";
         $tabella_host = turno($tabella_host, $gioco, $x, $y);
@@ -63,6 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
             $_SESSION['vittoria']='sfidante';
         }
+        var_dump($tabella_sfidante);
+        echo "\n ------------------------------------------";
+        var_dump($tabella_host);
+        echo "\n ------------------------------------------";
+        echo "\n ------------------------------------------";
+        var_dump($turno);
+        echo "\n ------------------------------------------";
+        echo($_SESSION['vittoria']);
         $turno=$turno+1;
     }
 
@@ -73,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $_GET['risultato']=$_SESSION['risultato'];
     $_GET['vittoria']=$_SESSION['vittoria'];
+    var_dump($_GET);
+    //var_dump($_SESSION);
 }
 
 

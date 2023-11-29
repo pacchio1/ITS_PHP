@@ -117,7 +117,6 @@
         $output="";
         if ($x >= 0 && $x < 10 && $y >= 0 && $y < 10) {
             if ($tabella_da_attaccare[$x][$y] == 'X') {
-
                 $output="Colpito!";
                 $tabella_da_attaccare[$x][$y] = 'H';
             } else {
