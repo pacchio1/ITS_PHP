@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $_GET['risultato']=$_SESSION['risultato'];
-
+    $_GET['vittoria']=$_SESSION['vittoria'];
 }
 
 

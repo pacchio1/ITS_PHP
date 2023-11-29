@@ -8,6 +8,7 @@ $id=$_SESSION['id'];
 $turno=$_SESSION['turno'];
 $_SESSION['risultato']='';
 $_SESSION['vittoria']='';
+$_SESSION['stillPlaying']='';
 
 
 $db = new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
@@ -48,7 +49,7 @@ if($nickname==$_SESSION['sfidante']){
 }if($nickname==$_SESSION['host']){
     $whoami='host';
 }
-echo $whoami;
+$_SESSION['whoami']=$whoami;
 ?>
 
 <!DOCTYPE html>
@@ -93,6 +94,7 @@ echo $whoami;
         <?php } ?>
     </table>
     <script>
+    var vittoria = "";
     var turno = 0;
     var stato_div = document.getElementById("stato_div");
     var stato = "";
@@ -110,7 +112,8 @@ echo $whoami;
             type: 'GET',
             url: 'game_backend.php',
             data: {
-                risultato: stato
+                risultato: stato,
+                vittoria: vittoria,
             },
             success: function(response) {
                 stato_div.innerText=stato;
@@ -120,8 +123,9 @@ echo $whoami;
                 }else{
                     tabellone.setAttribute("class", "waiting");
                 }
-
-
+                if(vittoria!=''){
+                    window.location.replace("vittoria.php");
+                }
             },
             error: function() {
                 console.log('Si è verificato un errore durante la chiamata AJAX(get)');
