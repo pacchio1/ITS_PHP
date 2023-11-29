@@ -6,10 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php if($_SESSION['whoami']==$_SESSION['vittoria']){
+    <h1><?php if($_SESSION['whoami']==$_SESSION['vittoria']){
         echo $_SESSION['nickname']." hai vinto!";
     }else{
         echo $_SESSION['nickname']." hai perso!";
-    }  ?>
+    }  ?></h1>
 </body>
 </html>
