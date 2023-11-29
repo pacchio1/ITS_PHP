@@ -1,13 +1,13 @@
 <?php
-
 require '../class/SqlConnection.php';
 //TODO: gioco funzione click, (host fare prima mossa) aspettare avversario
 session_start();
 
 $nickname=$_SESSION['nickname'];
 $id=$_SESSION['id'];
-
 $turno=$_SESSION['turno'];
+$_SESSION['risultato']='';
+$_SESSION['vittoria']='';
 
 
 $db = new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
@@ -30,7 +30,26 @@ if ($tabella_giocatore==0){
     array('O', 'O', 'X', 'O', 'O', 'O', 'X', 'O', 'O', 'O'));
 }else{
     $tabella_giocatore = json_decode($tabella_giocatore[0]);
-}?>
+}
+$id=$_SESSION['id'];
+$sfidante=$db->query("SELECT nicknameSfidante FROM partita WHERE ID_Partita = '$id'");
+$sfidante = $sfidante->fetch_row();
+if($sfidante!=null){
+    $sfidante= $sfidante[0];
+    $_SESSION['sfidante']=$sfidante;
+}
+
+$host=$db->query("SELECT nicknameHost FROM partita WHERE ID_Partita = '$id'");
+$host = $host->fetch_row();
+$host= $host[0];
+$_SESSION['host']=$host;
+if($nickname==$_SESSION['sfidante']){
+    $whoami='sfidante';
+}if($nickname==$_SESSION['host']){
+    $whoami='host';
+}
+echo $whoami;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +61,11 @@ if ($tabella_giocatore==0){
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1><?php echo $_SESSION['host'].' VS '.$_SESSION['sfidante'].' Turno:'.$_SESSION['turno'];?> </div></h1>
+    <?php if(isset($_SESSION['host'])and $sfidante!=null and isset($turno)){
+        echo "<h1>". $_SESSION['host'].' VS '.$sfidante.' Turno:'.$_SESSION['turno']."</div></h1>";
+    }?>
+
+
     <h2><?php echo "\n /game.php?id={$id}";?></h2>
 
     <h2>Colpisci:<div id="mossa"></div></h2>
@@ -76,6 +99,9 @@ if ($tabella_giocatore==0){
     var id = "<?php echo $id; ?>";
     var mossa = document.getElementById("mossa");
     var tabellone = document.getElementById("tabellone");
+    if(<?php echo "'".$whoami."'";?>=='sfidante'){
+        tabellone.setAttribute("class", "waiting");
+    }
     //setTimeout(GetAjax, 4000); // Ritarda la prossima chiamata di 4 secondi
     function GetAjax() {
         // get per ottenere se ha finito l' avversario
@@ -87,12 +113,14 @@ if ($tabella_giocatore==0){
                 risultato: stato
             },
             success: function(response) {
+                stato_div.innerText=stato;
                 console.log("1 ciclo e stato fatto");
                 if(<?php echo $_SESSION['turno'] ?>%2==0){
-                    tabellone.setAttribute("class", "waiting");
-                }else{
                     tabellone.setAttribute("class", "red");
+                }else{
+                    tabellone.setAttribute("class", "waiting");
                 }
+
 
             },
             error: function() {
@@ -102,21 +130,21 @@ if ($tabella_giocatore==0){
     }
 
     function shoot(i, j) {
-        var coordinates = {i,j};
+        var coordinates = [i,j];
         var tdElement = document.getElementById(i + "_" + j);
         tdElement.removeAttribute("onclick");
         tdElement.setAttribute("class", "selected");
         console.log("sparato a: " + i + " " + j);
         tabellone.setAttribute("class", "waiting");
+        mossa.innerText=i + "," + j;
         $.ajax({
             type: 'POST',
             url: 'game_backend.php',
             data: {
-                coordinates: coordinates,
+                i: i,
+                j: j
             },
             success: function(response) {
-                mossa.innerText=coordinates.i + "," + coordinates.j;
-                stato_div.innerText=stato
                 GetAjax();
             },
             error: function() {

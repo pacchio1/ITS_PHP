@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $game->salvaStatoGioco($game->get_tabA(),$nk, $db);
         ob_end_flush();
         $tabella=$game->get_tabA();
-
+        $_SESSION['turno']=0;
 
     }
 }

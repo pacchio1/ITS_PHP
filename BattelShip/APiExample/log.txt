@@ -7,3 +7,34 @@ Trying to access array offset on value of type null in C:\xampp\htdocs\Php\Batte
 Trying to access array offset on value of type null in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 27
 
 Undefined variable $tabella_opponent in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 46
+
+
+------------------------------------------------
+
+[Wed Nov 29 12:51:21 2023] PHP Warning:  Undefined array key 2 in C:\xampp\htdocs\Php\BattelShip\class\BattelShip.php on line 119
+[Wed Nov 29 12:51:21 2023] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\Php\BattelShip\class\BattelShip.php on line 119
+[Wed Nov 29 12:51:21 2023] PHP Fatal error:  Uncaught Error: Call to a member function fetch_row() on bool in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php:61
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 61
+[Wed Nov 29 12:51:21 2023] 127.0.0.1:53248 [200]: POST /game/game_backend.php - Uncaught Error: Call to a member function fetch_row() on bool in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php:61
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 61
+[Wed Nov 29 12:51:21 2023] 127.0.0.1:53248 Closing
+[Wed Nov 29 12:51:22 2023] 127.0.0.1:53252 Accepted
+[Wed Nov 29 12:51:22 2023] PHP Warning:  Undefined array key "coordinates" in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 9
+[Wed Nov 29 12:51:22 2023] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 37
+[Wed Nov 29 12:51:22 2023] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 37
+[Wed Nov 29 12:51:22 2023] PHP Warning:  Undefined array key "" in C:\xampp\htdocs\Php\BattelShip\class\BattelShip.php on line 119
+[Wed Nov 29 12:51:22 2023] PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\Php\BattelShip\class\BattelShip.php on line 119
+[Wed Nov 29 12:51:22 2023] PHP Fatal error:  Uncaught Error: Call to a member function fetch_row() on bool in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php:61
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 61
+[Wed Nov 29 12:51:22 2023] 127.0.0.1:53252 [200]: GET /game/game_backend.php?risultato= - Uncaught Error: Call to a member function fetch_row() on bool in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php:61
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Php\BattelShip\game\game_backend.php on line 61
+[Wed Nov 29 12:51:22 2023] 127.0.0.1:53252 Closing
+[Wed Nov 29 12:51:22 2023] 127.0.0.1:53254 Accepted

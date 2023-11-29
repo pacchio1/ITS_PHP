@@ -5,72 +5,74 @@ require_once '../class/BattelShip.php';
 //TODO: posiziono il click casella, salvo, faccio partire evento per cambiare turno
 
 session_start();
-
-$coordinates=$_POST['coordinates'];
-$nickname=$_POST['nickname'];//nome di chi sta giocando adesso
-
-
-$gioco = new BattelShip();
-
-
-$db= new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
-$db->connect();
-
-$turno=$db->query("SELECT turno FROM partita WHERE ID_Partita = '$id'");
-$turno = $turno->fetch_row();
-$turno= $turno[0];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    var_dump($_POST);
+    $x=$_POST['i'];
+    $y=$_POST['j'];
+    $nickname=$_SESSION['nickname'];
+    $id=$_SESSION['id'];
+    $sfidante=$_SESSION['sfidante'];
+    $host=$_SESSION['host'];
 
 
-if($turno==0){
-$id=$_SESSION['id'];
-$sfidante=$db->query("SELECT nicknameSfidante FROM partita WHERE ID_Partita = '$id'");
-$sfidante = $sfidante->fetch_row();
-$sfidante= $sfidante[0];
-$_SESSION['sfidante']=$sfidante;
-
-$host=$db->query("SELECT nicknameHost FROM partita WHERE ID_Partita = '$id'");
-$host = $host->fetch_row();
-$host= $host[0];
-$_SESSION['host']=$host;
-}
-
-$tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
-$tabella_sfidante = $tabella_sfidante->fetch_row();
-
-$tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
-$tabella_host = $tabella_host->fetch_row();
-
-var_dump($tabella_sfidante);
-var_dump($tabella_host);
-
-function turno($tabella_enemy, $gioco, $coordinates){
-    $tabella_enemy = $gioco->attacca($coordinates[0],$coordinates[1], $tabella_enemy);
-    $_SESSION['risultato']=$tabella_enemy[1];
-    return $tabella_enemy[0];
-}
+    $gioco = new BattelShip();
 
 
-if ($turno % 2 == 0) {
-    //echo "È il turno del host\n";
-    $tabella_sfidante = turno($tabella_sfidante, $gioco, $coordinates);
-    if ($gioco->controllaVittoria($tabella_sfidante)) {
-        $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+    $db= new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
+    $db->connect();
+
+    $turno_db=$db->query("SELECT turno FROM partita WHERE ID_Partita = '$id'");
+
+
+    $turno_db = $turno_db->fetch_row();
+    $turno_db= $turno_db[0];
+
+    $turno=$turno_db;
+
+
+    $tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
+    $tabella_sfidante = $tabella_sfidante->fetch_row();
+
+    $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
+    $tabella_host = $tabella_host->fetch_row();
+
+    var_dump($tabella_sfidante);
+    var_dump($tabella_host);
+
+    function turno($tabella_enemy, $gioco, $x, $y){
+        $tabella_enemy = $gioco->attacca($x,$y, $tabella_enemy);
+        $_SESSION['risultato']=$tabella_enemy[1];
+        return $tabella_enemy[0];
     }
 
-} else {
-    //echo "È il turno dello sfidante\n";
-    $tabella_host = turno($tabella_host, $gioco, $coordinates);
-    $gioco->controllaVittoria($tabella_sfidante);
-    if ($gioco->controllaVittoria($tabella_host)) {
-        $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+
+    if ($turno % 2 == 0) {
+        //echo "È il turno del host\n";
+        $tabella_sfidante = turno($tabella_sfidante, $gioco,$x,$y);
+        if ($gioco->controllaVittoria($tabella_sfidante)) {
+            $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+            $_SESSION['vittoria']='host';
+        }
+        $turno=$turno+1;
+
+    } else {
+        //echo "È il turno dello sfidante\n";
+        $tabella_host = turno($tabella_host, $gioco, $x, $y);
+        $gioco->controllaVittoria($tabella_sfidante);
+        if ($gioco->controllaVittoria($tabella_host)) {
+            $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+            $_SESSION['vittoria']='sfidante';
+        }
+        $turno=$turno+1;
     }
+
+
+    $turno_db=$db->query("UPDATE partita SET turno='$turno' WHERE ID_Partita = '$id'");
+    $_SESSION['turno']=$turno;
 }
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $_GET['risultato']=$_SESSION['risultato'];
 
-$turno=$turno+1;
-$_SESSION['turno']=$db->query("UPDATE partita SET turno='$turno' WHERE ID_Partita = '$id'");
-$_SESSION['turno']=$_SESSION['turno']->fetch_row();
-$_SESSION['turno']=$_SESSION['turno'][0];
-
-
+}
 
 
