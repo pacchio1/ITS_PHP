@@ -91,10 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['turno']=$turno;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $_GET['risultato']=$_SESSION['risultato'];
-    $_GET['vittoria']=$_SESSION['vittoria'];
-    var_dump($_GET);
-    //var_dump($_SESSION);
+    $_SESSION['stillPlaying']=false;
+    //debug vittoria: $_SESSION['vittoria']='host';
+    echo $_SESSION['risultato']." , ".$_SESSION['vittoria'];
 }
 
 

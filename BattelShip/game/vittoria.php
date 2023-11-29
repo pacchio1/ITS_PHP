@@ -1,3 +1,5 @@
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1><?php if($_SESSION['whoami']==$_SESSION['vittoria']){
+    <h1><?php
+    if($_SESSION['whoami']==$_SESSION['vittoria']){
         echo $_SESSION['nickname']." hai vinto!";
     }else{
         echo $_SESSION['nickname']." hai perso!";

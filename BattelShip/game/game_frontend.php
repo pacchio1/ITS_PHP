@@ -15,7 +15,7 @@ $db = new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
 $db->connect();
 $tabella_giocatore = $db->query('SELECT tabella FROM giocatori WHERE nickname ='. "'".$nickname. "'");
 $tabella_giocatore = $tabella_giocatore->fetch_row();
-var_dump($tabella_giocatore);
+//var_dump($tabella_giocatore);
 if ($tabella_giocatore==0){
     //debug:
     $tabella_giocatore=array(
@@ -94,6 +94,17 @@ $_SESSION['whoami']=$whoami;
         <?php } ?>
     </table>
     <script>
+    function cambioTurno(){
+        <?php
+            if($_SESSION['stillPlaying']==true){
+                    echo 'tabellone.setAttribute("class", "red");';
+                }else{
+                    echo 'tabellone.setAttribute("class", "waiting");';
+                }
+            ?>
+        console.log("1 ciclo e stato fatto");
+    }
+    setTimeout(cambioTurno, 4000);
     var vittoria = "";
     var turno = 0;
     var stato_div = document.getElementById("stato_div");
@@ -110,9 +121,16 @@ $_SESSION['whoami']=$whoami;
             url: 'game_backend.php',
             method: 'GET',
             success: function(data){
-                var risultato = data.risultato;
                 console.log(data);
-                $('#result').html(data);
+                data=data.split(",");
+                stato_div.innerText = "Risultato: " + data[0];
+                vittoria = data[1];
+
+                if(vittoria=='host' || vittoria=='sfidante'){
+                    window.location.replace("vittoria.php");
+                }
+
+                console.log('vittoria'+vittoria)
 
             },
             error: function(xhr, status, error){
@@ -120,8 +138,8 @@ $_SESSION['whoami']=$whoami;
             }
         });
     }
-
     function shoot(i, j) {
+        <?php $_SESSION['stillPlaying']=true; ?>
         var coordinates = [i,j];
         var tdElement = document.getElementById(i + "_" + j);
         tdElement.removeAttribute("onclick");
@@ -138,16 +156,6 @@ $_SESSION['whoami']=$whoami;
             },
             success: function(response) {
                 GetAjax();
-                stato_div.innerText=risultato;
-                console.log("1 ciclo e stato fatto");
-                if(<?php echo $_SESSION['turno'] ?>%2==0){
-                    tabellone.setAttribute("class", "red");
-                }else{
-                    tabellone.setAttribute("class", "waiting");
-                }
-                if(vittoria!=''){
-                    window.location.replace("vittoria.php");
-                }
             },
             error: function() {
                 console.log('Si è verificato un errore durante la chiamata AJAX (Post)');
