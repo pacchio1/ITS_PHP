@@ -95,16 +95,9 @@ $_SESSION['whoami']=$whoami;
     </table>
     <script>
     function cambioTurno(){
-        <?php
-            if($_SESSION['stillPlaying']==true){
-                    echo 'tabellone.setAttribute("class", "red");';
-                }else{
-                    echo 'tabellone.setAttribute("class", "waiting");';
-                }
-            ?>
-        console.log("1 ciclo e stato fatto");
+
     }
-    setTimeout(cambioTurno, 4000);
+
     var vittoria = "";
     var turno = 0;
     var stato_div = document.getElementById("stato_div");
@@ -112,10 +105,9 @@ $_SESSION['whoami']=$whoami;
     var id = "<?php echo $id; ?>";
     var mossa = document.getElementById("mossa");
     var tabellone = document.getElementById("tabellone");
-    if(<?php echo "'".$whoami."'";?>=='sfidante'){
-        tabellone.setAttribute("class", "waiting");
-    }
-    //setTimeout(GetAjax, 4000); // Ritarda la prossima chiamata di 4 secondi
+    //tabellone.setAttribute("class", "waiting");
+    setTimeout(cambioTurno, 4000);
+    //setTimeout(funzione, 4000); // Ritarda la prossima chiamata di 4 secondi
     function GetAjax() {
         $.ajax({
             url: 'game_backend.php',
@@ -125,13 +117,10 @@ $_SESSION['whoami']=$whoami;
                 data=data.split(",");
                 stato_div.innerText = "Risultato: " + data[0];
                 vittoria = data[1];
-
                 if(vittoria=='host' || vittoria=='sfidante'){
                     window.location.replace("vittoria.php");
                 }
-
-                console.log('vittoria'+vittoria)
-
+                //console.log('vittoria'+vittoria)
             },
             error: function(xhr, status, error){
                 console.log(error);

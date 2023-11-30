@@ -47,52 +47,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     function turno($tabella_enemy, $gioco, $x, $y){
         $tabella_enemy = $gioco->attacca($x,$y, $tabella_enemy);
         $_SESSION['risultato']=$tabella_enemy[1];
+
         return $tabella_enemy[0];
     }
-//TODO: Gestire turni per blocare sblocare campo
+//TODO: Gestire turni per bloccare sbloccare campo
 
     if ($turno % 2 == 0) {
         //echo "È il turno del host\n";
         $tabella_sfidante = turno($tabella_sfidante, $gioco,$x,$y);
+        $_SESSION['stillPlaying']='host';
         if ($gioco->controllaVittoria($tabella_sfidante)) {
             $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
             $_SESSION['vittoria']='host';
         }
-        var_dump($tabella_sfidante);
-        echo "\n ------------------------------------------";
-        var_dump($tabella_host);
-        echo "\n ------------------------------------------";
-        echo "\n ------------------------------------------";
-        echo($turno);
-        echo "\n ------------------------------------------";
-        echo($_SESSION['vittoria']);
+        $gioco->salvaStatoGioco($tabella_sfidante,$host,$db);
         $turno=$turno+1;
     } else {
         //echo "È il turno dello sfidante\n";
         $tabella_host = turno($tabella_host, $gioco, $x, $y);
-        $gioco->controllaVittoria($tabella_sfidante);
+        $_SESSION['stillPlaying']='sfidante';
         if ($gioco->controllaVittoria($tabella_host)) {
             $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
             $_SESSION['vittoria']='sfidante';
         }
-        var_dump($tabella_sfidante);
-        echo "\n ------------------------------------------";
-        var_dump($tabella_host);
-        echo "\n ------------------------------------------";
-        echo "\n ------------------------------------------";
-        var_dump($turno);
-        echo "\n ------------------------------------------";
-        echo($_SESSION['vittoria']);
+        $gioco->salvaStatoGioco($tabella_host,$sfidante,$db);
         $turno=$turno+1;
     }
-
+    var_dump($tabella_sfidante);
+    echo "\n ------------------------------------------";
+    var_dump($tabella_host);
+    echo "\n ------------------------------------------";
+    echo "\n ------------------------------------------";
+    var_dump($turno);
+    echo "\n ------------------------------------------";
+    echo($_SESSION['vittoria']);
 
     $turno_db=$db->query("UPDATE partita SET turno='$turno' WHERE ID_Partita = '$id'");
     $_SESSION['turno']=$turno;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $_SESSION['stillPlaying']=false;
-    //debug vittoria: $_SESSION['vittoria']='host';
+
+    //debug vittoria: $_SESSION['vittoria']='host';" , ".$_SESSION['stillPlaying']
     echo $_SESSION['risultato']." , ".$_SESSION['vittoria'];
 }
 
