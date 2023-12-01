@@ -1,11 +1,11 @@
 <?php
 include 'class/SqlConnection.php';
 session_start();
-$id_sessione = uniqid();
+$id = uniqid();
 $nickname = $_SESSION['nickname'];
-$_SESSION['id'] = $id_sessione;
+$_SESSION['id'] = $id;
 echo "<h1> benvenuto $nickname </h1>";
-$url = "/game.php?id={$id_sessione}";
+$url = "/game.php?id={$id}";
 echo "<a href='$url'> gioca! </a>, $url";
 
 $db = new SqlConnection('127.0.0.1', 'root', null, 'battagliaNavalePacchiotti');
