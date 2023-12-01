@@ -37,10 +37,11 @@ if($sfidante!=null){
     $sfidante= $sfidante[0];
     $_SESSION['sfidante']=$sfidante;
 }
-
-$host=$db->query("SELECT nicknameHost FROM partita WHERE ID_Partita = '$id'");
+echo "SELECT nicknameHost FROM partita WHERE ID_Partita like '$id'";
+$host=$db->query("SELECT nicknameHost FROM partita WHERE ID_Partita like '$id'");
 $host = $host->fetch_row();
 $host= $host[0];
+
 $_SESSION['host']=$host;
 if($nickname==$_SESSION['sfidante']){
     $whoami='sfidante';
@@ -110,11 +111,17 @@ $_SESSION['whoami']=$whoami;
         method: 'GET',
         success: function(data) {
             console.log(data)
-            if (data === <?php echo "'".$nickname."'"; ?>) {
+            data=data.split(",");
+            if (data[0] === <?php echo "'".$nickname." '"; ?>) {
                 tabellone.setAttribute("class", "red");
-            } else {
+            }
+            else {
                 tabellone.setAttribute("class", "waiting");
             }
+            if (data[1] == <?php echo "' ".$host."'"; ?> || data[1] == <?php echo "' ".$sfidante."'"; ?>) {
+                window.location.replace("vittoria.php");
+            }
+
         },
         error: function(xhr, status, error) {
             console.log(error);

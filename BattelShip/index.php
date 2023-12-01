@@ -32,6 +32,7 @@ $db->close();
 
 $_SESSION['nickname'] = $nickname;
 
+
 header("Location: placeShip_frontend.php");
 exit();
 

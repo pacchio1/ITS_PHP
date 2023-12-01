@@ -14,7 +14,7 @@ $result = $db->query("SELECT COUNT(*) FROM partita WHERE ID_Partita = '$id'");
 $result = $result->fetch_row();
 $result = $result[0];
 if ($result == 0) {
-    $db->query("INSERT INTO partita (ID_Partita, nicknameHost, whoisplaying ) VALUES ('$id', '$nickname', '$nickname')");
+    $db->query("INSERT INTO partita (ID_Partita, turno ,nicknameHost, whoisplaying ) VALUES ('$id', 0, '$nickname', '$nickname')");
 }
 
 $db->close();

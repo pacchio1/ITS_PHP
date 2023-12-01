@@ -50,9 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         return $tabella_enemy[0];
     }
-//TODO: Gestire turni per bloccare sbloccare campo
 
-    if ($turno % 2 != 0) {
+
+    if ($turno % 2 !== 0) {
         //echo "È il turno del host\n";
         $tabella_sfidante =  turno($tabella_sfidante, $gioco,$x,$y);
         $_SESSION['stillPlaying']='host';
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gioco->SalvaVincitore($host,$sfidante,$host,$db);
             $_SESSION['vittoria']='host';
         }
-        $gioco->salvaStatoGioco($tabella_sfidante,$host,$db);
+        $gioco->salvaStatoGioco($tabella_sfidante,$sfidante,$db);
         $turno=$turno+1;
         $db->query("UPDATE partita SET whoisplaying='$host' WHERE ID_Partita = '$id'");
     } else {
@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $gioco->SalvaVincitore($host,$sfidante,$sfidante,$db);
             $_SESSION['vittoria']='sfidante';
         }
-        $gioco->salvaStatoGioco($tabella_host,$sfidante,$db);
+        $gioco->salvaStatoGioco($tabella_host,$host,$db);
         $turno=$turno+1;
         $db->query("UPDATE partita SET whoisplaying='$sfidante' WHERE ID_Partita = '$id'");
     }
