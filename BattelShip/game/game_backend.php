@@ -57,21 +57,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tabella_sfidante = turno($tabella_sfidante, $gioco,$x,$y);
         $_SESSION['stillPlaying']='host';
         if ($gioco->controllaVittoria($tabella_sfidante)) {
-            $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+            $gioco->SalvaVincitore($host,$sfidante,$host,$db);
             $_SESSION['vittoria']='host';
         }
         $gioco->salvaStatoGioco($tabella_sfidante,$host,$db);
         $turno=$turno+1;
+        $db->query("UPDATE partita SET whoisplaying='$host' WHERE ID_Partita = '$id'");
     } else {
         //echo "È il turno dello sfidante\n";
         $tabella_host = turno($tabella_host, $gioco, $x, $y);
         $_SESSION['stillPlaying']='sfidante';
         if ($gioco->controllaVittoria($tabella_host)) {
-            $gioco->SalvaVincitore($host,$sfidante,$nickname,$db);
+            $gioco->SalvaVincitore($host,$sfidante,$sfidante,$db);
             $_SESSION['vittoria']='sfidante';
         }
         $gioco->salvaStatoGioco($tabella_host,$sfidante,$db);
         $turno=$turno+1;
+        $db->query("UPDATE partita SET whoisplaying='$sfidante' WHERE ID_Partita = '$id'");
     }
     var_dump($tabella_sfidante);
     echo "\n ------------------------------------------";
@@ -82,12 +84,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "\n ------------------------------------------";
     echo($_SESSION['vittoria']);
 
+
     $turno_db=$db->query("UPDATE partita SET turno='$turno' WHERE ID_Partita = '$id'");
     $_SESSION['turno']=$turno;
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-    //debug vittoria: $_SESSION['vittoria']='host';" , ".$_SESSION['stillPlaying']
     echo $_SESSION['risultato']." , ".$_SESSION['vittoria'];
 }
 

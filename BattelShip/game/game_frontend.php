@@ -50,6 +50,8 @@ if($nickname==$_SESSION['sfidante']){
     $whoami='host';
 }
 $_SESSION['whoami']=$whoami;
+
+
 ?>
 
 <!DOCTYPE html>
@@ -94,9 +96,6 @@ $_SESSION['whoami']=$whoami;
         <?php } ?>
     </table>
     <script>
-    function cambioTurno(){
-
-    }
 
     var vittoria = "";
     var turno = 0;
@@ -105,9 +104,26 @@ $_SESSION['whoami']=$whoami;
     var id = "<?php echo $id; ?>";
     var mossa = document.getElementById("mossa");
     var tabellone = document.getElementById("tabellone");
-    //tabellone.setAttribute("class", "waiting");
-    setTimeout(cambioTurno, 4000);
-    //setTimeout(funzione, 4000); // Ritarda la prossima chiamata di 4 secondi
+    tabellone.setAttribute("class", "waiting");
+
+    function cambioTurno(){
+        $.ajax({
+        url: 'turno.php',
+        method: 'GET',
+        success: function(data) {
+            console.log(data)
+            if (data === <?php echo "'".$nickname."'"; ?>) {
+                tabellone.setAttribute("class", "red");
+            } else {
+                tabellone.setAttribute("class", "waiting");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+        });
+    }
+    setInterval(cambioTurno, 5000);
     function GetAjax() {
         $.ajax({
             url: 'game_backend.php',
@@ -117,7 +133,8 @@ $_SESSION['whoami']=$whoami;
                 data=data.split(",");
                 stato_div.innerText = "Risultato: " + data[0];
                 vittoria = data[1];
-                if(vittoria=='host' || vittoria=='sfidante'){
+                console.log(data[1]);
+                if(vittoria==' host' || vittoria==' sfidante'){
                     window.location.replace("vittoria.php");
                 }
                 //console.log('vittoria'+vittoria)
