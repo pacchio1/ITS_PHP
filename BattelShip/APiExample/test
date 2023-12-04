@@ -1,0 +1,15 @@
+<?php
+                for ($i = 0; $i < 10; $i++) {
+                    for ($j = 0; $j < 10; $j++) {
+                        if($tab_sfidante[$i][$j]=='X'){
+                            echo "document.getElementById('".$i."_".$j."').setAttribute('class', 'hit');";
+                        }else if($tab_sfidante[$i][$j]=='M'){
+                            echo "document.getElementById('".$i."_".$j."').setAttribute('class', 'water');";
+                        }else{
+                            echo "document.getElementById('".$i."_".$j."').setAttribute('class', 'empty');";
+
+                        }
+                    }
+                } ?>
+if($tab_sfidante[$i][$j]=='X'){echo 'class="' . 'hit"';}
+                else if($tab_sfidante[$i][$j]=='M'){echo 'class="' . 'water"';}

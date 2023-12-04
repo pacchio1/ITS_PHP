@@ -10,10 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $whoisplaying = $whoisplaying->fetch_row();
     $whoisplaying= $whoisplaying[0];
 
-    $winner=$db->query("SELECT vincitore FROM partita WHERE ID_Partita = '$id'");
+    $winner=$db->query("SELECT count(vincitore) FROM partita WHERE ID_Partita = '$id'");
     $winner = $winner->fetch_row();
     $winner= $winner[0];
-
-    echo $whoisplaying." , ".$winner;
+    if($winner==1){
+        echo "partita_finita";
+    }
+    else{
+    echo $whoisplaying;
+    }
 
 }

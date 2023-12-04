@@ -12,9 +12,11 @@ if (!isset($_SESSION['nickname'])) {
     exit();
 }
 $id=$_GET['id'];
-$nk=$_SESSION['nickname'];
+$nickname=$_SESSION['nickname'];
 $_SESSION['id']=$id;
 $_SESSION['turno']=0;
+
+
 header('Location: game/game_frontend.php');
 
 

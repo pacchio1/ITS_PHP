@@ -49,7 +49,20 @@ if($nickname==$_SESSION['sfidante']){
     $whoami='host';
 }
 $_SESSION['whoami']=$whoami;
+if($whoami=='host')
+{
+    $tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
+    $row = $tabella_sfidante->fetch_assoc();
+    $tabella = json_decode($row['tabella'], true);
+    $tab_sfidante=$tabella;
 
+}
+if($whoami=='sfidante'){
+    $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
+    $row = $tabella_host->fetch_assoc();
+    $tabella = json_decode($row['tabella'], true);
+    $tab_sfidante=$tabella;
+}
 
 ?>
 
@@ -72,11 +85,12 @@ $_SESSION['whoami']=$whoami;
 
     <h2>Colpisci:<div id="mossa"></div></h2>
     <table class="red" id="tabellone">
-        <?php for ($i = 0; $i < 10; $i++) { ?>
-        <tr>
+        <?php for ($i = 0; $i < 10; $i++) { ?><tr>
             <?php for ($j = 0; $j < 10; $j++) { ?>
-            <td id="<?php echo ($i . '_' . $j) ?>"
-            onclick="shoot(<?php echo ($i . ',' . $j) ?>)"></td>
+            <td id="<?php echo ($i . '_' . $j) ?>"onclick="shoot(<?php echo ($i . ',' . $j) ?>)">
+                <?php if($tab_sfidante[$i][$j]=='H'){echo '<div class="hit">H</div>';}
+                else if($tab_sfidante[$i][$j]=='M'){echo '<div class="water">M</div>';}?>
+            </td>
             <?php } ?>
         </tr>
         <?php } ?>
@@ -111,17 +125,19 @@ $_SESSION['whoami']=$whoami;
         method: 'GET',
         success: function(data) {
             console.log(data)
-            data=data.split(",");
-            if (data[0] === <?php echo "'".$nickname." '"; ?>) {
+            if (data === <?php echo "'".$nickname."'"; ?>) {
                 tabellone.setAttribute("class", "red");
+
+
             }
             else {
                 tabellone.setAttribute("class", "waiting");
                 location.reload();
             }
-            if (data[1] == <?php echo "' ".$host."'"; ?> || data[1] == <?php echo "' ".$sfidante."'"; ?>) {
+            if(data ==="partita_finita"){
                 window.location.replace("vittoria.php");
             }
+
 
         },
         error: function(xhr, status, error) {

@@ -18,7 +18,12 @@ td {
 .red {
     background-color: red;
 }
-
+.water{
+    background-color:aqua;
+}
+.hit{
+    background-color: greenyellow;
+}
 .blu {
     background-color: lightblue;
 }

@@ -11,9 +11,18 @@
 
 <body>
     <h1>Posiziona le tue barche</h1>
-    <div id="board">
-
-    </div>
+    <table class="blu" id="tabellone">
+        <?php for ($i = 0; $i < 10; $i++) { ?>
+        <tr>
+            <?php for ($j = 0; $j < 10; $j++) { ?>
+            <td id="<?php echo ($i . '_' . $j) ?>"
+            onclick="shoot(<?php echo ($i . ',' . $j) ?>)"></td>
+            <?php } ?>
+        </tr>
+        <?php } ?>
+    </table>
+    <!-- <div id="board">
+    </div> -->
     <br>
     <div>
         <input type="radio" name="Incrociatore1" value="incrociatore"><img src="img/4.png" alt="4">(Incrociatore)
@@ -34,8 +43,25 @@
     <script>
     var tabella = [];
     var barca = [];
+    var campo=[[0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0]];
+    function shoot(i,j) {
+        barca = [];
+                        var coordinates = i + ',' + j;
+                        console.log('Hai cliccato sulla cella: ' + coordinates);
+                        barca.push(i, j);
+    }
 
-    function generateGrid() {
+
+   /*  function generateGrid() {
         var table = $('<table>').addClass('blu');
         for (var i = 0; i < 10; i++) {
             var row = $('<tr>');
@@ -49,11 +75,14 @@
                     });
                     row.append(cell);
                 })(i, j);
+                if(campo[i][j]==1){
+                    cell.addClass('occupate');
+                }
             }
             table.append(row);
         }
         $('#board').append(table);
-    }
+    } */
 
     var orientamento = 'orizzontale';
     $('#ruotaBarche').on('click', function() {
@@ -79,7 +108,6 @@
             }
         });
     });
-
     var boat_placed = 6;
 
     // Chiamata AJAX
@@ -107,6 +135,96 @@
             barca.push(orientamento, tipo_barca);
             console.log(barca);
             tabella.push(barca);
+            var lungo=0;
+            if(orientamento=='verticale'){
+
+                if(tipo_barca=='incrociatore'){
+                    var x=barca[0];
+                    var y=barca[1];
+                    if(x+3>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+1) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+2) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+3) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                }
+                else if(tipo_barca=='sottomarino'){
+                    var x=barca[0];
+                    var y=barca[1];
+                    if(x+2>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+1) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+2) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                }
+                else if(tipo_barca=='cacciatorpediniere'){
+                    var y=barca[1];
+                    var x=barca[0];
+                    if(x+1>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x+1) + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                }
+            }else if(orientamento=='orizzontale'){
+                if(tipo_barca=='incrociatore'){
+                    var x=barca[0];
+                    var y=barca[1];
+                    if(y+3>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+1));
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+2));
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+3));
+                    tdElement.setAttribute("class", "selected");
+                }
+                else if(tipo_barca=='sottomarino'){
+                    var x=barca[0];
+                    var y=barca[1];
+                    if(y+2>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+1));
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+2));
+                    tdElement.setAttribute("class", "selected");
+                }
+                else if(tipo_barca=='cacciatorpediniere'){
+                    var x=barca[0];
+                    var y=barca[1];
+                    if(y+1>=10){
+                        alert("barca fuori dal tabellone")
+                        window.location.replace("/html/nickname.html");
+                    }
+                    var tdElement = document.getElementById(x + "_" + y);
+                    tdElement.setAttribute("class", "selected");
+                    var tdElement = document.getElementById((x) + "_" + (y+1));
+                    tdElement.setAttribute("class", "selected");
+                }
+            }
+            barca[0]
             barca = [];
             alert('barca posizionata!');
             boat_placed--;
@@ -114,9 +232,9 @@
 
     });
 
-    $(document).ready(function() {
+    /* $(document).ready(function() {
         generateGrid();
-    });
+    }); */
     </script>
     DEBUG: <a href="lobby.php">ignora posizionamento</a>
 </body>
