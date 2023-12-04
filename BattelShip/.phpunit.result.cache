@@ -1,0 +1,1 @@
+{"version":1,"defects":{"App\\Test\\FilterTest::testAttaccaColpito":4,"App\\Test\\FilterTest::testAttaccaMancato":3},"times":{"App\\Test\\FilterTest::testAttaccaColpito":0.006,"App\\Test\\FilterTest::testAttaccaMancato":0}}
