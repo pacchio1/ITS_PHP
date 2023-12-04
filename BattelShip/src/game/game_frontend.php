@@ -15,7 +15,7 @@ $db->connect();
 $tabella_giocatore = $db->query('SELECT tabella FROM giocatori WHERE nickname ='. "'".$nickname. "'");
 $tabella_giocatore = $tabella_giocatore->fetch_row();
 
-if ($tabella_giocatore==0){
+if ($tabella_giocatore==null){
     $tabella_giocatore=array(
     array('O', 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'O', 'O'),
     array('O', 'O', 'O', 'O', 'X', 'O', 'O', 'O', 'O', 'O'),
