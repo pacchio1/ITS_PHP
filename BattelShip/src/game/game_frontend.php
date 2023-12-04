@@ -48,20 +48,35 @@ if($nickname==$_SESSION['sfidante']){
     $whoami='host';
 }
 $_SESSION['whoami']=$whoami;
-if($whoami=='host')
-{
-    $tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
-    $row = $tabella_sfidante->fetch_assoc();
-    $tabella = json_decode($row['tabella'], true);
-    $tab_sfidante=$tabella;
+try{
+    if($whoami=='host'){
+        $tabella_sfidante=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$sfidante'");
+        @$row = $tabella_sfidante->fetch_assoc();
+        @$tabella = json_decode($row['tabella'], true);
+        @$tab_sfidante=$tabella;
+    }
+    if($whoami=='sfidante'){
+        $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
+        @$row = $tabella_host->fetch_assoc();
+        @$tabella = json_decode($row['tabella'], true);
+        @$tab_sfidante=$tabella;
+    }
+    if($tab_sfidante==null){
+        $tab_sfidante=array(
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
+        array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'));
+    }
+}catch(Exception $e){
+    echo "aspettando sfidante";
 }
-if($whoami=='sfidante'){
-    $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
-    $row = $tabella_host->fetch_assoc();
-    $tabella = json_decode($row['tabella'], true);
-    $tab_sfidante=$tabella;
-}
-
 ?>
 
 <!DOCTYPE html>
