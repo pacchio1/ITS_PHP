@@ -41,7 +41,6 @@ if($sfidante!=null){
 $host=$db->query("SELECT nicknameHost FROM partita WHERE ID_Partita like '$id'");
 $host = $host->fetch_row();
 $host= $host[0];
-
 $_SESSION['host']=$host;
 if($nickname==$_SESSION['sfidante']){
     $whoami='sfidante';
@@ -55,7 +54,6 @@ if($whoami=='host')
     $row = $tabella_sfidante->fetch_assoc();
     $tabella = json_decode($row['tabella'], true);
     $tab_sfidante=$tabella;
-
 }
 if($whoami=='sfidante'){
     $tabella_host=$db->query("SELECT tabella FROM giocatori WHERE nickname = '$host'");
