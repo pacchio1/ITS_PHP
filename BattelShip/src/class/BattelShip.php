@@ -5,7 +5,6 @@ class BattelShip
     public $tabella_B;
     public function __construct()
     {
-        //TODO: usare oggetto board
         $this->tabella_A =
             array(
                 array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'),
@@ -33,11 +32,11 @@ class BattelShip
                 array('O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O')
             );
     }
-    public function get_tabA():array
+    public function get_tabA(): array
     {
         return $this->tabella_A;
     }
-    public function get_tabB():array
+    public function get_tabB(): array
     {
         return $this->tabella_B;
     }
@@ -113,25 +112,24 @@ class BattelShip
         return $tabella_su_cui_posizionare;
     }
 
-    public function attacca($x, $y, $tabella_da_attaccare):array
+    public function attacca($x, $y, $tabella_da_attaccare): array
     {
-        $output="";
+        $output = "";
         if ($x >= 0 && $x < 10 && $y >= 0 && $y < 10) {
             if ($tabella_da_attaccare[$x][$y] == 'X') {
-                $output="Colpito!";
+                $output = "Colpito!";
                 $tabella_da_attaccare[$x][$y] = 'H';
             } else {
 
-                $output="Mancato!";
+                $output = "Mancato!";
                 $tabella_da_attaccare[$x][$y] = 'M';
             }
         } else {
-            $output="Posizione non valida!";
-
+            $output = "Posizione non valida!";
         }
-        return [$tabella_da_attaccare,$output];
+        return [$tabella_da_attaccare, $output];
     }
-    public function controllaVittoria($tabella_da_controllare):bool
+    public function controllaVittoria($tabella_da_controllare): bool
     {
         for ($i = 0; $i < 10; $i++) {
             for ($j = 0; $j < 10; $j++) {
@@ -144,11 +142,12 @@ class BattelShip
     }
     public function salvaStatoGioco($tabella_da_salvare, $nickname, $db)
     {
-        $tabella_da_salvare=json_encode($tabella_da_salvare);
+        $tabella_da_salvare = json_encode($tabella_da_salvare);
         $sql = "UPDATE giocatori SET tabella = '$tabella_da_salvare' WHERE nickname = '$nickname'";
         $db->query($sql);
     }
-    public function SalvaVincitore($nickname_host,$nickname_sfidante, $nickname, $db){
+    public function SalvaVincitore($nickname_host, $nickname_sfidante, $nickname, $db)
+    {
         $sql = "UPDATE partita SET vincitore = '$nickname'  WHERE nicknameHost = '$nickname_host' and nicknameSfidante='$nickname_sfidante'";
         $db->query($sql);
     }

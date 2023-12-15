@@ -1,5 +1,4 @@
 <?php
-//TODO: router per il gioco
 include 'class/SqlConnection.php';
 include 'class/BattelShip.php';
 session_start();

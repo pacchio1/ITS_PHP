@@ -2,7 +2,6 @@
 require_once '../class/SqlConnection.php';
 require_once '../class/BattelShip.php';
 
-//TODO: posiziono il click casella, salvo, faccio partire evento per cambiare turno
 
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

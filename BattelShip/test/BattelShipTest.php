@@ -98,6 +98,7 @@ class FilterTest extends TestCase
         );
         $this->assertEquals($tabella_aspettata, $battelShip->posizionaNave(3, 3, "orizzontale", "cacciatorpediniere", $tabella), "");
     }
+    
     public function testControllaVittoria()
     {
         $battelShip = new BattelShipPacchiotti();
